@@ -2,7 +2,7 @@ package main
 
 import (
     "context"
-    pb "github.com/adanrs/tarea2/booksapp"
+    pb "github.com/adanrs/tarea2/"
     "google.golang.org/grpc"
     "log"
     "os"
