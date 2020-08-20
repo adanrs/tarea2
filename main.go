@@ -18,9 +18,9 @@ func main() {
     s := grpc.NewServer()
     pb.RegisterBookInfoServer(s, &server{})
 
-    log.Printf("Starting gRPC listener on port " + port)
+    log.Printf("GRPC ON  " + port)
 
     if err := s.Serve(lis); err != nil {
-        log.Fatalf("failed to serve: %v", err)
+        log.Fatalf("POS NO SIRVE: %v", err)
     }
 }

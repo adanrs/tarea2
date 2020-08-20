@@ -31,23 +31,22 @@ func main() {
         Author:    "Abraham Silberschatz",
         Publisher: "John Wiley & Sons"})
     if err != nil {
-        log.Fatalf("\n\n\nNo se pudo agregar el libro: %v", err)
+        log.Fatalf("\n\n\nImposible de agregar el libro: %v", err)
     }
 
-    // Obtener libro
+
     log.Printf("\n\n\nLibro creado ID: %s", r.Value)
     book, err := c.GetBook(ctx, &pb.BookID{Value: r.Value})
     if err != nil {
-        log.Fatalf("\n\n\nEl libro consultado no existe: %v", err)
+        log.Fatalf("\n\n\nNo se encontro el libro: %v", err)
     }
     log.Printf("\n\n\nLibro consultado: ", book.String())
 
-    // Eliminar libro
     bookDel, err := c.DeleteBook(ctx, &pb.BookID{Value: r.Value})
     if err != nil {
-        log.Fatalf("\n\n\nNo se pudo eliminar el libro: %v", err)
+        log.Fatalf("\n\n\nImposible de eliminar libro: %v", err)
     }
-    log.Printf("\n\n\nLibro eliminado: ", bookDel.String())
+    log.Printf("\n\n\Libro eliminado: ", bookDel.String())
 
     // Obtener libro nuevamente para comprobar si se elimino
     bookGet, err := c.GetBook(ctx, &pb.BookID{Value: r.Value})
@@ -58,29 +57,28 @@ func main() {
 	    log.Printf("\n\n\nLibro consultado: ", bookGet.String())
     }
 
-    // Actualizar libro
     upd, err := c.UpdateBook(ctx, &pb.Book{
         Id:        "1",
-        Title:     "UPDATED Book",
+        Title:     "Libro Actualizado",
         Edition:   "10th",
-        Copyright: "2012",
-        Language:  "ENGLISH",
+        Copyright: "2030",
+        Language:  "ESPAÑOL",
         Pages:     "976",
         Author:    "Abraham Silberschatz",
         Publisher: "John Wiley & Sons"})
     if err != nil {
-        log.Fatalf("\n\n\nNo se pudo actualizar el libro: %v", err)
+        log.Fatalf("\n\n\nImposible Actualizar: %v", err)
     } else {
-	    // Obtener libro nuevamente para comprobar si se actualizo
+	    
 	    bookGetUpdated, err := c.GetBook(ctx, &pb.BookID{Value: upd.Value})
 	    if err != nil {
-		    log.Fatalf("\n\n\nEl libro consultado no existe: %v", err)
+		    log.Fatalf("\n\n\nEl libro no encontrado: %v", err)
 	    }
-	    log.Printf("\n\n\nLibro actualizado correctamente: ", bookGetUpdated.String())
+	    log.Printf("\n\n\nActualizacion completada: ", bookGetUpdated.String())
     }
 
     // Leer CSV
     c.ReadCSV(ctx,&pb.File{Value: "books.csv"})
-    log.Printf("\n\n\nProcesando y creando libros desde archivo CSV")
+    log.Printf("\n\n\n Verificando CSV")
 
 }

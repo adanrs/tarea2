@@ -51,12 +51,7 @@ func (s *server) DeleteBook(ctx context.Context, in *pb.BookID) (*pb.BookID, err
 }
 
 func (s *server) UpdateBook(ctx context.Context, in *pb.Book) (*pb.BookID, error) {
-   // out, err := uuid.NewV4()
-   // if err != nil {
-   //     return nil, status.Errorf(codes.Internal,
-   //         "Error while generating Book ID", err)
-   // }
-   // in.Id = out.String()
+ 
     if s.bookMap == nil {
         s.bookMap = make(map[string]*pb.Book)
     }
@@ -65,15 +60,11 @@ func (s *server) UpdateBook(ctx context.Context, in *pb.Book) (*pb.BookID, error
 }
 
 func (s *server) ReadCSV(ctx context.Context, in *pb.File) (*pb.BookID, error)  {
-    // Leer archivo CSV
     f, _ := os.Open(in.Value)
-
-    // Carga todos los resgistros del archivo en un slice/array
    bookline, err := csv.NewReader(f).ReadAll()
    if err != nil {
       log.Fatal(err)
    }
-
    if s.bookMap == nil {
         s.bookMap = make(map[string]*pb.Book)
     }
@@ -101,7 +92,7 @@ func (s *server) ReadCSV(ctx context.Context, in *pb.File) (*pb.BookID, error)  
 	if err != nil {
 		log.Printf("\n\n\nEl libro consultado no existe: %v", err)
 	} else {
-		log.Printf("\n\n\nConsultando libro agregado:\n\n", bookGet.String())
+		log.Printf("\n\n\nVerificando insert:\n\n", bookGet.String())
 	}
    }
 
