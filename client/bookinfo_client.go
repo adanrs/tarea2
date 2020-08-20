@@ -1,8 +1,8 @@
-package main
+package client
 
 import (
     "context"
-    pb "github.com/adanrs/tarea2"
+    pb "github.com/adanrs/tarea2/booksapp"
     "google.golang.org/grpc"
     "log"
     "os"
